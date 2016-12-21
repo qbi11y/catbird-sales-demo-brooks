@@ -1,0 +1,27 @@
+<div class="container">
+    <!-- Page title / search row -->
+    <div class="row">
+        <div class="col m5">
+            <!--Page title -->
+            <h1 class="section-inline"><a ui-sref="assets"></a>Login</h1>  
+            <form name="loginForm">
+                <md-input-container>
+                    <label>Username</label>
+                    <input name="username" ng-model="user.username" required>
+                    <div ng-messages="loginForm.username.$error">
+                        <div ng-message="required">This is required!</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Password</label>
+                    <input name="password" ng-model="user.password" required>
+                    <div ng-messages="loginForm.password.$error">
+                        <div ng-message="required">This is required!</div>
+                    </div>
+                </md-input-container>
+
+                <md-button ng-click="login(user)">Login</md-button>
+            </form>
+        </div>
+    </div>

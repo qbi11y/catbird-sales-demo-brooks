@@ -1,0 +1,122 @@
+<div class="container">
+    <!-- <div class="row">
+        <div class="col m3"><a ui-sref="index">Catbird</a></div>
+        <div class="col m3"><a ui-sref="assets">Assets</a></div>
+        <div class="col m3"><a ui-sref="assets">Visualization</a></div>
+        
+        <div class="col m3">
+            <ul>
+                <li><a ui-sref="settings">Settings</a></li>
+                <li>Alerts</li>
+            </ul>
+        </div>
+    </div> -->
+    <div>As of {{ summary.ec2_total_instances.timestamp | date:'EEEE'}}</div>
+    <!-- Asset Breakdown section -->
+    <div class="row">
+        <div class="col m12">
+            <h1 class='section-inline'><a ui-sref="assets">{{ summary.ec2_total_instances.total | number }}</a> EC2 Instances</h1><span><a ui-sref="assets">View All Instances</a></span>
+        </div>
+        <div class="col m3">
+            <h5>New EC2 Instances</h5>
+            <h5>{{ summary.ec2_new_instances.total | number }}</h5>
+            <h6>Over last 24 hours</h6>
+        </div>
+        <div class="col m3">
+            <h5>Regions</h5>
+            <h5>{{ summary.ec2_regions.total | number }}</h5>
+        </div>
+        <div class="col m3">
+            <h5>Virtual Private Clouds</h5>
+            <h5>{{ summary.ec2_vpcs.total | number }}</h5>
+        </div>
+        <div class="col m3">
+            <h5>Security Groups</h5>
+            <h5>{{ summary.ec2_security_groups.total | number }}</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col m12">
+            <h1 class="section-inline">Flow Traffic</h1>
+            <span><a ui-sref="topology">View Flow Traffic Details</a></span>
+
+            <div id="container" style="width:100%; height:400px;"></div>
+            <div class="row">
+                <div class="col m4 center">
+                    <div class="catbird-well">
+                        <h4>High</h4>
+                        <h5>1,043 GB/s</h5>
+                        <h6>Monday, Jan. 18, 2017</h6>
+                    </div>
+                </div>
+                <div class="col m4 center">
+                    <div class="catbird-well">
+                        <h4>Low</h4>
+                        <h5>43 GB/s</h5>
+                        <h6>Monday, Jan. 18, 2017</h6>
+                    </div>
+                </div>
+                <div class="col m4 center">
+                    <div class="catbird-well">
+                        <h4>Average</h4>
+                        <h5>482 GB/s</h5> 
+                    </div>                    
+                </div>
+            </div>
+            <!-- <h5>Trend Data (total traffic volume for account over 7 days default, last 24 hours - hours, last hour)</h5> -->
+        </div>
+    </div>
+
+
+    <!-- System Alerts -->
+    <div class="row">
+        <div class="col m12">
+            <h1 class="section-inline">Alerts (2)</h1>
+            <span><a ui-sref="assets">View All Alerts</a></span>
+        </div>
+        <div class="col m12">
+            <div class="catbird-well">
+                <ul class="catbird-list">
+                    <li>
+                        <div class="row">
+                            <div class="col m1">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                            <div class="col m11">
+                                <div ng-click="showDetails = true" ng-show="showDetails == false || !showDetails">Running out of database space space</div>
+                                <div ng-click="showDetails = false" ng-show="showDetails == true">Running out of database space space</div>
+                                <div ng-show="showDetails == true">You're using 96% of your database storage limit of 100GB.</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="row">
+                            <div class="col m1">
+                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            </div>
+                            <div class="col m11">Unable to connect to AWS</div>
+                            <!-- IAM Auth Error: The provided credentials could not be validated -->
+                        </div>
+                    </li>
+                </ul>
+
+
+
+                
+                
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col m12">
+            <ul>
+                <li>System overview</li>
+                <li>How much stuff do I have (number of total assets and breakdown into categories)? <a ui-sref="assets">View Assets</a></li>
+                <li>How is it doing (overall health status of environment)?</li>
+                <li>Anything I need to be aware of? (actionable alerts) <a ui-sref="alerts">View Alerts</li>
+            </ul> 
+        </div>
+    </div> -->
+    <div>Footer</div>
+</div>

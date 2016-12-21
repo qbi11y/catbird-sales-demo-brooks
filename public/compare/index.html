@@ -1,0 +1,49 @@
+<!--
+How to compare instance details
+
+Interfaces Summary - description(primary interface for something), availability zone, interface type (interface), mac address, interface id (eni-5a920e37), public and private ip, dns name (ip-10-0-0-11.eu-central-1.compute.internal), subnet id(subnet-1ef14076), vpc id(14) 
+
+ENI Details - Status (is it attached), Availabiliity Zone (Us-west-2a), association_attribute (54.200.1.185)   uid(123456789) attachment(status attached, 2016-11-07T21:32:40+00:00 )  availability_zone   description interface_type  mac_address network_interface_id    owner_id    private_dns_name    private_ip_address  private_ip_addresses    requester_id    requester_managed   source_dest_check   status  subnet_id   tags    vpc_id
+
+-->
+<script></script>
+
+<div class="container">
+    <!-- Page header information -->
+    <div class="row">
+        <div class="col m12">
+            <a ui-sref="assets"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Back to Assets</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col m5">
+            <h1><a ui-sref="assets"></a>Compare</h1>
+        </div>
+    </div>
+
+    <!-- Table Section -->
+    <ul class="catbird-list">
+        <li class="header">
+            <div class="row">
+                <div class="col m3"></div>
+                <div class="col m3 center-align">
+                    <div class="chip">Product Name<i class="close material-icons">close</i></div>
+                </div>
+                <div class="col m3 center-align">
+                    <div class="chip">Product Name<i class="close material-icons">close</i></div>
+                </div>
+                <div class="col m3 center-align">
+                    <div class="chip">Product Name<i class="close material-icons">close</i></div>
+                </div>
+            </div>
+        </li>
+        <li ng-repeat="i in [1,2,3,4,5,6,7,8,9]">
+            <div class="row">
+                <div class="col m3"><strong>Field</strong></div>
+                <div class="col m3 center-align">Value</div>
+                <div class="col m3 center-align">Value</div>
+                <div class="col m3 center-align">Value</div>
+            </div>
+        </li>
+    </ul>
+</div>

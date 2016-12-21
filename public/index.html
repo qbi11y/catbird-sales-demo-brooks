@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Catbird">
+    <head>
+        <meta charset="UTF-8">
+        <title>Catbird</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <div class="row">
+                    <div class="col m2"><a ui-sref="index">Catbird</a></div>
+                    <div class="col m3"><a ui-sref="assets">Inventory</a></div>
+                    <div class="col m3"><a ui-sref="topology">Visualization</a></div>
+                    <div class="col m4 right-align">
+                        <a class='dropdown-button btn' href='#' data-activates='user'><i class="material-icons">person</i> Admin</a>
+
+                        <!-- Dropdown Structure -->
+                        <ul id='user' class='dropdown-content'>
+                            <li><a href="">Account Settings</a></li>
+                            <li><a href="">Profile Settings</a></li>
+                            <li><a href="">Logout</a></li>
+                        </ul>
+
+                        <a class='dropdown-button btn' href='#' data-activates='settings'><i class="material-icons">settings</i></a>
+
+                        <!-- Dropdown Structure -->
+                        <ul id='settings' class='dropdown-content'>
+                            <li><a ui-sref="settings">System Info</a></li>
+                            <li><a ui-sref="events">Events</a></li>
+                        </ul>
+
+                        <!--<a class='dropdown-button btn' href='#' data-activates='notifications'><i class="material-icons">notifications</i></a>
+
+                        <!-- Dropdown Structure -->
+                        <!--<ul id='notifications' class='dropdown-content'>-->
+                            <!-- <li><a href="#!">one</a></li>
+                            <li><a href="#!">two</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#!">three</a></li> -->
+                        <!--</ul>-->
+                    </div>
+                </div>
+            </div>
+        </header>
+        <ui-view></ui-view>
+    </body>
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.1/angular-materialize.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="https://use.fontawesome.com/a943f99aea.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="d3.min.js"></script>
+
+    <script src="app.js"></script>
+    <script src="home/controller.js"></script>
+    <script src="settings/controller.js"></script>
+    <script src="assets/controller.js"></script>
+    <script src="events/controller.js"></script>
+    <script src="compare/controller.js"></script>
+    <script src="topology/controller.js"></script>
+    <script src="login/controller.js"></script>
+
+    <script src="factories/assets.js"></script>
+    <script src="factories/users.js"></script>
+    <script src="directives/datatable.js"></script>
+    <script src="directives/chartDirective.js"></script>
+    <script src="directives/TopologyGraph.Ring.js"></script>
+    <script src="directives/TopologyGraph.Selection.js"></script>
+    <script src="directives/TopologyGraph.Endpoint.js"></script>
+    <script src="directives/TopologyGraph.Flow.js"></script>
+    <script src="directives/TopologyGraph.Legend.js"></script>
+
+</html>

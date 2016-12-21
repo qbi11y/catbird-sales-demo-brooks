@@ -1,0 +1,137 @@
+h1 {
+  font-weight: 100; }
+
+*:focus {
+  outline: 0;
+  outline: none; }
+
+body {
+  background-color: #eceef0; }
+
+header {
+  background-color: #505a67;
+  color: green;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 40px; }
+
+header a {
+  color: white; }
+
+h1.section-inline {
+  display: inline-block;
+  margin-right: 25px; }
+
+.catbird-well {
+  background-color: white;
+  width: 100%;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 10px;
+  min-height: 170px; }
+
+.catbird-list > li {
+  border-bottom: 1px solid #eceef0;
+  margin-top: 20px; }
+
+.catbird-header-actions {
+  margin-top: 40px; }
+
+/*table { 
+    width: 750px; 
+    border-collapse: collapse; 
+    margin:50px auto;
+    }*/
+/*th { 
+    background: #3498db; 
+    color: white; 
+    font-weight: bold; 
+    }
+
+td, th { 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    text-align: left; 
+    font-size: 18px;
+    }*/
+.labels tr td {
+  background-color: #2cc16a;
+  font-weight: bold;
+  color: #fff; }
+
+.label tr td label {
+  display: block; }
+
+[data-toggle="toggle"] {
+  display: none; }
+
+ul.catbird-list-expandable > li:hover {
+  cursor: pointer; }
+
+ul.catbird-list-expandable > li:first-of-type {
+  border-bottom: 3px solid #d6dae0;
+  margin-bottom: 40px; }
+
+/*ul > li {
+    border-bottom: 1px solid $catbird-separator-color;
+    margin: 20px 0;
+    padding: 0;
+}*/
+ul.catbird-list-stacked > li > div.row:first-of-type {
+  border-bottom: 1px solid #d6dae0; }
+
+ul.catbird-list > li {
+  border-bottom: 1px solid #d6dae0;
+  margin: 20px 0;
+  padding: 0; }
+
+ul.catbird-list-compare > li:first-of-type {
+  border-bottom: 3px solid #d6dae0; }
+
+th {
+  font-weight: bold; }
+
+#visualization, #visualization-panel {
+  height: 1200px; }
+
+#visualization {
+  padding-top: 50px; }
+
+#chart img {
+  height: 600px;
+  padding: 50px; }
+
+.node {
+  font: 300 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  fill: #bbb; }
+
+.node:hover {
+  fill: #000; }
+
+.link {
+  stroke: steelblue;
+  stroke-opacity: .4;
+  fill: none;
+  pointer-events: none; }
+
+.node:hover,
+.node--source,
+.node--target {
+  font-weight: 700; }
+
+.node--source {
+  fill: #2ca02c; }
+
+.node--target {
+  fill: #d62728; }
+
+.link--source,
+.link--target {
+  stroke-opacity: 1;
+  stroke-width: 2px; }
+
+.link--source {
+  stroke: #d62728; }
+
+.link--target {
+  stroke: #2ca02c; }

@@ -1,0 +1,32 @@
+ul.catbird-list-expandable > li:hover { 
+    cursor: pointer;
+}
+
+ul.catbird-list-expandable > li:first-of-type { 
+    border-bottom: 3px solid $catbird-separator-color;
+    margin-bottom: 40px;
+}
+
+/*ul > li {
+    border-bottom: 1px solid $catbird-separator-color;
+    margin: 20px 0;
+    padding: 0;
+}*/
+
+ul.catbird-list-stacked > li > div.row:first-of-type {
+    border-bottom: 1px solid $catbird-separator-color;
+}
+
+ul.catbird-list > li {
+    border-bottom: 1px solid $catbird-separator-color;
+    margin: 20px 0;
+    padding: 0;   
+}
+
+ul.catbird-list-compare > li:first-of-type {
+    border-bottom: 3px solid $catbird-separator-color;
+}
+
+th {
+    font-weight: bold;
+}

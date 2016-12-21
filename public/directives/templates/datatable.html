@@ -1,0 +1,117 @@
+<ul class="catbird-list-expandable">
+        <li>
+            <div class="row">
+                <div ng-repeat="header in headers" ng-class="{'col' : 0 == 0, 'offset-m2': $index == 0, 'm1': header.width == 1, 'm2' : header.width == 2 }"><strong>{{ header.title }}</strong></div>
+            </div>
+        </li>
+
+        <li>
+            <div class="row">
+                <div class="col m2">
+                    <div class="row">
+                        <div class="col m4">
+                            <i ng-show="!asset.show" class="material-icons">keyboard_arrow_right</i>
+                            <i ng-show="asset.show" class="material-icons">keyboard_arrow_down</i>
+                        </div>
+                        <div class="col m4">
+                            <input type="checkbox" id="asset" />
+                            <label for="asset"></label>
+                        </div>
+                        <div class="col m4">
+                            <i class="fa fa-circle-thin"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col m2">Some Name</div>
+                <div class="col m2">Region</div>
+                <div class="col m1">
+                    <a data-toggle="popover" title="6 VPCs" data-content="List of VPCs here">6</a>
+                </div>
+                <div class="col m2">
+                    <a data-toggle="popover" title="3 Security Group" data-content="List of security here">3</a>
+                </div>
+                <div class="col m1">
+                    <a data-toggle="popover" title="4 Tags" data-content="List of tags here">4</a>
+                </div>
+                <div class="col m2">192.168.1.2</div>
+                <div class="col m12" ng-show="asset.show">
+                    <div class="row">                
+                        <div class="col m12 offset-m2">
+                            <div class="row">
+                                <div class="col m4">
+                                    <div><strong>Description</strong></div>
+                                    <div>Primary interface for demo application</div>
+                                </div>
+                                <div class="col m4">
+                                    <div><strong>Availability Zone</strong></div>
+                                    <div>us-west-1a</div>
+                                    <div><strong>Association Attribute</strong></div>
+                                    <div>172.1.1.19</div>
+                                </div>
+                                <div class="col m4">
+                                    <div><strong>UID</strong></div>
+                                    <div>1234567890</div>
+                                    <div><strong>Attachment</strong></div>
+                                    <div>Status Attached</div>
+                                    <div>November 13, 11:35a</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </li>
+
+        <li ng-repeat="asset in data">
+            <div class="row">
+                <div class="col m2">
+                    <div class="row">
+                        <div class="col m4" ng-click="toggleDetails(asset)">
+                            <i ng-show="!asset.show" class="material-icons">keyboard_arrow_right</i>
+                            <i ng-show="asset.show" class="material-icons">keyboard_arrow_down</i>
+                        </div>
+                        <div class="col m4">
+                            <input type="checkbox" id="asset{{$index}}" ng-model="asset.selected" ng-click="updateSelected(asset)" />
+                            <label for="asset{{$index}}"></label>
+                        </div>
+                        <div class="col m4">
+                            <i ng-class="{ 'fa fa-circle': asset.facing == 'private', 'fa fa-circle-thin': asset.facing == 'public'}"aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col m2">{{ asset.name }}</div>
+                <div class="col m2">{{ asset.region }}</div>
+                <div class="col m1"><a href="">{{ asset.vpc }}</a></div>
+                <div class="col m2"><a href="">{{ asset.securityGroup }}</a></div>
+                <div class="col m1"><a href="">{{ asset.tags.length }}</a></div>
+                <div class="col m2">{{ asset.subnet }}</div>
+                <div class="col m12" ng-show="asset.show">
+                    <div class="row">                
+                        <div class="col m12 offset-m2">
+                            <div class="row">
+                                <div class="col m4">
+                                    <div><strong>Description</strong></div>
+                                    <div>Primary interface for demo application</div>
+                                </div>
+                                <div class="col m4">
+                                    <div><strong>Availability Zone</strong></div>
+                                    <div>us-west-1a</div>
+                                    <div><strong>Association Attribute</strong></div>
+                                    <div>172.1.1.19</div>
+                                </div>
+                                <div class="col m4">
+                                    <div><strong>UID</strong></div>
+                                    <div>1234567890</div>
+                                    <div><strong>Attachment</strong></div>
+                                    <div>Status Attached</div>
+                                    <div>November 13, 11:35a</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </li>
+    </ul>

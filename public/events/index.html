@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row">
+        <div class="col m12">
+            <h1><a ui-sref="assets"></a>Events</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col m12">
+            <ul class="catbird-list">
+                <li ng-repeat="event in events">
+                    <h5>{{ event.title }}</h5>
+                    <p>{{ event.timestamp }}</p>
+                    <p>{{ event.description }}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

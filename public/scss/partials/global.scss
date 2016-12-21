@@ -1,0 +1,77 @@
+*:focus {
+    outline: 0;
+    outline: none;
+}
+
+body {
+    background-color: $catbird-grey;
+}
+
+header {
+    background-color: $catbird-dark-grey;
+    color: green;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 40px;
+}
+
+header a {
+    color: $catbird-header-link-color;
+}
+
+h1.section-inline {
+    display: inline-block;
+    margin-right: 25px;
+}
+
+.catbird-well {
+    background-color: $catbird-well-bg-color;
+    width: 100%;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 10px;
+    min-height: 170px;
+}
+
+.catbird-list > li {
+    border-bottom: 1px solid $catbird-grey;
+    margin-top: 20px;
+}
+
+.catbird-header-actions {
+    margin-top: 40px;
+}
+
+/*table { 
+    width: 750px; 
+    border-collapse: collapse; 
+    margin:50px auto;
+    }*/
+
+/*th { 
+    background: #3498db; 
+    color: white; 
+    font-weight: bold; 
+    }
+
+td, th { 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    text-align: left; 
+    font-size: 18px;
+    }*/
+
+.labels tr td {
+    background-color: #2cc16a;
+    font-weight: bold;
+    color: #fff;
+}
+
+.label tr td label {
+    display: block;
+}
+
+
+[data-toggle="toggle"] {
+    display: none;
+}

@@ -1,0 +1,141 @@
+<div class="container">
+    <!-- Page header information -->
+    <div class="row">
+        <div class="col m12">
+            <a ui-sref="assets"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Back to Assets</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col m12">
+            <h1 class="section-inline">
+                <a ui-sref="assets"></a>Visualization</h1>
+            <span><a href="" ng-click="triggerModal('open')">Edit Visualization</a></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col m12">
+            Show
+            <md-input-container>
+                <md-select aria-label="test" ng-model="someModel" placeholder="" ng-init="someModel = 'graph'" ng-change="updateView(someModel)">
+                    <md-option ng-value="type" ng-repeat="type in viewTypes">{{ type }}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </div>
+    <div class="row" id="graph">
+        <div class="col m12 catbird-well center-align" id="visualization">
+            <div class="" id="no-chart">To build the network topology visualization <a class="" href="" ng-click="triggerModal('open')">select</a> the desired security groups.</div>
+            <div class="hide" id="chart">
+                <d3chart data="chartData"></d3chart>
+                <button class="btn btn-primary" ng-click="refreshChart()">Refresh Chart</button>
+                <!--<h5><img src="images/bundled-hiearrarchy2.png" /></h5>-->
+                <ul>
+                    <li><a href="" ng-click="showDetails('vpc')">VPC</a></li>
+                    <li><a href="" ng-click="showDetails('sg')">Security Group -see the info or the traffic</a></li>
+                    <li><a href="" ng-click="showDetails('ec2')">EC2 Instance</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col m4 catbird-well hide" id="visualization-panel">
+            <h5>{{ selectedDetail }} Details</h5>
+            <ul>
+                <li ng-repeat="(key, value) in selectedDetails">
+                    <div class="row">
+                        <div class="col m6">{{ key }}</div>
+                        <div class="col m6">{{ value }}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row hide" id="table">
+        <div class="col m12 hide" id="visualization-flow">
+            <!-- <datatable controller="TopologyCtrl" data="{{dataFlow}}"></datatable> -->
+            <table class="bordered">
+                <thead>
+                    <tr>
+                        <th data-field="id">Interface</th>
+                        <th data-field="name">Source Address</th>
+                        <th data-field="price">Destination Address</th>
+                        <th data-field="price">Source Port</th>
+                        <th data-field="price">Destination Port</th>
+                        <th data-field="price">Protocol</th>
+                        <th data-field="price">Packets</th>
+                        <th data-field="price">Bytes</th>
+                        <th data-field="price">Start</th>
+                        <th data-field="price">End</th>
+                        <th data-field="price">Action</th>
+                        <th data-field="price">Log Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <!-- Interface -->
+                    <tr>
+                        <td>eni-0fdd204f</td>
+                        <td>112.186.20.117</td>
+                        <td>10.0.0.5</td>
+                        <td>50590</td>
+                        <td>33899</td>
+                        <td>6</td>
+                        <td>2</td>
+                        <td>80</td>
+                        <td>{{ 1479410775 * 1000 | date: 'short' }}</td>
+                        <td>{{ 1479410819 * 1000 | date: 'short' }}</td>
+                        <td>Reject</td>
+                        <td>OK</td>
+                    </tr>
+
+                    <tr>
+                        <td>eni-0fdd204f</td>
+                        <td>10.0.0.5</td>
+                        <td>162.213.2.253</td>
+                        <td>123</td>
+                        <td>123</td>
+                        <td>17</td>
+                        <td>2</td>
+                        <td>152</td>
+                        <td>{{ 1479410825 * 1000 | date: 'short' }}</td>
+                        <td>{{ 1479411119 * 1000 | date: 'short' }}</td>
+                        <td>Reject</td>
+                        <td>OK</td>
+                    </tr>
+
+                    <tr>
+                        <td>eni-0fdd204f</td>
+                        <td>117.42.95.207</td>
+                        <td>10.0.0.5</td>
+                        <td>14974</td>
+                        <td>23</td>
+                        <td>6</td>
+                        <td>1</td>
+                        <td>40</td>
+                        <td>{{ 1479410825 * 1000 | date: 'short' }}</td>
+                        <td>{{ 1479410879 * 1000 | date: 'short' }}</td>
+                        <td>Reject</td>
+                        <td>OK</td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Modal Trigger -->
+
+    <!-- Modal Structure -->
+    <div id="demoModal" class="modal">
+        <div class="modal-content">
+            <h4>Modal header - search mechanism</h4>
+            <datatable controller="TopologyCtrl" data="{{assets}}"></datatable>
+        </div>
+        <div class="modal-footer">
+            <a class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="build()">Build Visualization</a>
+        </div>
+    </div>
+
+    <!-- Table Section -->
+
+</div>

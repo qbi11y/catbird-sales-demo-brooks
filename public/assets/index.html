@@ -1,0 +1,35 @@
+<div class="container">
+    <!-- Page title / search row -->
+    <div class="row">
+        <div class="col m5">
+            <!--Page title -->
+            <h1 class="section-inline"><a ui-sref="assets"></a>Inventory</h1>
+            
+            <!-- Asset type dropdown -->
+            Show
+            <md-input-container>
+                <md-select aria-label="test" ng-model="assetType" placeholder="" ng-init="assetType = 'EC2 Instances'" ng-change="showData(assetType)">
+                    <md-option ng-value="type" ng-repeat="type in assetTypes">{{ type }}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+
+        <!-- Search form -->
+        <div class="col m4 catbird-header-actions">
+            <div class="row valign-wrapper">
+                <div class="col m11"><input type="text" placeholder="Search Assets" ng-model="searchFilter.input"></div>
+                <div class="col m1"><i class="material-icons">search</i></div>
+            </div>
+        </div>
+
+        <!-- Compare button -->
+        <!--
+        <div class="col m3 right-align catbird-header-actions">
+            <a ui-sref="compare" class="waves-effect waves-light btn">Compare Assets</a>
+        </div>
+        -->
+    </div>
+
+    <!-- Datatable -->
+    <datatable data="{{ tableData }}" controller="AssetsCtrl" filter="searchFilter.input"></datatable>
+</div>
