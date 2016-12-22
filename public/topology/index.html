@@ -26,8 +26,8 @@
     <div class="row" id="graph">
         <div class="col m12 catbird-well center-align" id="visualization">
             <div class="" id="no-chart">To build the network topology visualization <a class="" href="" ng-click="triggerModal('open')">select</a> the desired security groups.</div>
-            <div class="hide" id="chart">
-                <d3chart data="chartData"></d3chart>
+            <div class="hide" id="chart" style="position: relative;">
+                <d3chart data="chartData" menu-clicked="menuClicked(item)" node-clicked="nodeClicked(node)"></d3chart>
                 <button class="btn btn-primary" ng-click="refreshChart()">Refresh Chart</button>
                 <!--<h5><img src="images/bundled-hiearrarchy2.png" /></h5>-->
                 <ul>
@@ -123,6 +123,7 @@
             </table>
         </div>
     </div>
+
     <!-- Modal Trigger -->
 
     <!-- Modal Structure -->

@@ -66,6 +66,15 @@ app.controller('TopologyCtrl', ['$scope', '$http', '$state', 'Assets', function(
         }
     }
 
+    $scope.menuClicked = function(item) {
+        $scope.showDetails('vpc');
+    };
+
+    $scope.nodeClicked = function(node) {
+        alert('Node Clicked');
+        console.log(node);
+    };
+
     $scope.refreshChart = function() {
         //$http.get('/topology/data.json').then(function(res) {
         //$http.get('/topology/getTopologyData.json').then(function(res) {

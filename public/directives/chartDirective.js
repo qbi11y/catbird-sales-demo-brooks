@@ -5,6 +5,7 @@ var tau = Math.PI * 2;
 app.factory('chordChart', function() {
 
     var chart = {
+
         animationTime: 750,
         initializeAnimationTime: 750,
         hoverAnimationTime: 250,
@@ -131,8 +132,8 @@ app.factory('chordChart', function() {
         // isTopologyLoading is true while a data refresh request is being performed, and cleared once the data is loaded
         isTopologyLoading: false,
 
-        isDriftMode: false,   // all drift-mode-related stuff can be deleted for AWS demo...// d3 gives you lots of reasons to make functions to get this field from an element
-        
+        isDriftMode: false, // all drift-mode-related stuff can be deleted for AWS demo...// d3 gives you lots of reasons to make functions to get this field from an element
+
         getter: function(key) {
             return function(item) {
                 return item[key];
@@ -140,13 +141,12 @@ app.factory('chordChart', function() {
         },
 
         // Sets up the top-level chart element once the DOM is ready
-        renderChart: function(element, data) {
-            if(this.chart && data) {
+        renderChart: function(element, data, scope) {
+            if (this.chart && data) {
                 this.loadData(data);
-                this.initChart();   // sort of "create topology"; redraw endpoints, etc.
+                this.initChart(); // sort of "create topology"; redraw endpoints, etc.
                 this.myRenderChart();
-            }
-            else {
+            } else {
                 this.el = element;
                 this.chartEl = element; //this.el.down('.d3-chart', true);
                 //this.loadingEl = this.el.down('.d3-loading', true);
@@ -171,21 +171,19 @@ app.factory('chordChart', function() {
         },
         // Once the chart has both data and an element, this initializes and updates it
         myRenderChart: function() {
-            if(this.chart && this.data) {
-                if(!this.chartInitialized) {
-                    if(this.loadingIndicator) {
-                       this.hideLoadingIndicator();
+            if (this.chart && this.data) {
+                if (!this.chartInitialized) {
+                    if (this.loadingIndicator) {
+                        this.hideLoadingIndicator();
                     }
                     this.initChart();
                     this.chartInitialized = true;
                     this.updateChart(0);
-                }
-                else {
+                } else {
                     this.updateChart();
                 }
-            }
-            else {
-                if(this.loadingIndicator) {
+            } else {
+                if (this.loadingIndicator) {
                     this.showLoadingIndicator();
                 }
             }
@@ -209,11 +207,11 @@ app.factory('chordChart', function() {
         },
 
         normalizeAngle: function(v, wrapPoint) {
-            if(!wrapPoint)
+            if (!wrapPoint)
                 wrapPoint = tau;
-            while(v < 0)
+            while (v < 0)
                 v += wrapPoint;
-            while(v > wrapPoint)
+            while (v > wrapPoint)
                 v -= wrapPoint;
             return v;
         },
@@ -221,13 +219,12 @@ app.factory('chordChart', function() {
         interpolateAngle: function(a, b) {
             // interpolate between two angles, factoring in the possible need for wraparound
             var normalizeAngle = this.normalizeAngle;
-            var d1 = normalizeAngle(b-a);
-            var d2 = -normalizeAngle(a-b);
+            var d1 = normalizeAngle(b - a);
+            var d2 = -normalizeAngle(a - b);
             var delta;
-            if(Math.abs(d1) > Math.abs(d2)) {
+            if (Math.abs(d1) > Math.abs(d2)) {
                 delta = d2;
-            }
-            else {
+            } else {
                 delta = d1;
             }
 
@@ -242,14 +239,18 @@ app.factory('chordChart', function() {
                 var path = document.createElementNS(d3.ns.prefix.svg, "path");
                 path.setAttribute("d", d);
 
-                var n = path.getTotalLength(), t = [0], i = 0, dt = fragmentSize;
+                var n = path.getTotalLength(),
+                    t = [0],
+                    i = 0,
+                    dt = fragmentSize;
                 while ((i += dt) < n) {
                     t.push(i);
                 }
                 t.push(n);
 
                 return t.map(function(t) {
-                    var p = path.getPointAtLength(t), a = [p.x, p.y];
+                    var p = path.getPointAtLength(t),
+                        a = [p.x, p.y];
                     a.t = t / n;
                     return a;
                 });
@@ -273,15 +274,22 @@ app.factory('chordChart', function() {
         drawPathFragments: function(p0, p1, p2, p3, startWidth, endWidth) {
             // Compute intersection of two infinite lines ab and cd.
             function lineIntersect(a, b, c, d) {
-                var x1 = c[0], x3 = a[0], x21 = d[0] - x1, x43 = b[0] - x3,
-                    y1 = c[1], y3 = a[1], y21 = d[1] - y1, y43 = b[1] - y3,
+                var x1 = c[0],
+                    x3 = a[0],
+                    x21 = d[0] - x1,
+                    x43 = b[0] - x3,
+                    y1 = c[1],
+                    y3 = a[1],
+                    y21 = d[1] - y1,
+                    y43 = b[1] - y3,
                     ua = (x43 * (y1 - y3) - y43 * (x1 - x3)) / (y43 * x21 - x43 * y21);
                 return [x1 + ua * x21, y1 + ua * y21];
             }
 
             // Compute unit vector perpendicular to p01.
             function perp(p0, p1) {
-                var u01x = p0[1] - p1[1], u01y = p1[0] - p0[0],
+                var u01x = p0[1] - p1[1],
+                    u01y = p1[0] - p0[0],
                     u01d = Math.sqrt(u01x * u01x + u01y * u01y);
                 return [u01x / u01d, u01y / u01d];
             }
@@ -296,14 +304,16 @@ app.factory('chordChart', function() {
 
             if (p0) {
                 // clip ad and dc using average of u01 and u12
-                var u01 = perp(p0, p1), e = [p1[0] + u01[0] + u12[0], p1[1] + u01[1] + u12[1]];
+                var u01 = perp(p0, p1),
+                    e = [p1[0] + u01[0] + u12[0], p1[1] + u01[1] + u12[1]];
                 a = lineIntersect(p1, e, a, b);
                 d = lineIntersect(p1, e, d, c);
             }
 
             if (p3) {
                 // clip ab and dc using average of u12 and u23
-                var u23 = perp(p2, p3), e = [p2[0] + u23[0] + u12[0], p2[1] + u23[1] + u12[1]];
+                var u23 = perp(p2, p3),
+                    e = [p2[0] + u23[0] + u12[0], p2[1] + u23[1] + u12[1]];
                 b = lineIntersect(p2, e, a, b);
                 c = lineIntersect(p2, e, d, c);
             }
@@ -327,7 +337,7 @@ app.factory('chordChart', function() {
                 .range(colorRange);
 
             return function getColorForID(id) {
-                if(idMap.has(id)) {
+                if (idMap.has(id)) {
                     return idMap.get(id);
                 }
                 // generate a new color by figuring out the next fractional slice
@@ -381,7 +391,7 @@ app.factory('chordChart', function() {
             See dummy data at bottom...
             */
 
-            
+
             if (!data) {
                 console.log("no data!");
                 return;
@@ -402,7 +412,7 @@ app.factory('chordChart', function() {
             data.topologyEndpoints = [];
             data.remoteEndpoints = [];
 
-            if(!data.session) {
+            if (!data.session) {
                 this.isTopologyActive = false;
                 data.endpoints = [];
                 data.flows = [];
@@ -416,7 +426,7 @@ app.factory('chordChart', function() {
             var allEndpoints = data.endpoints;
             var endpoint;
             console.log("endpoints = " + allEndpoints);
-            for(i = 0; i < allEndpoints.length; i++) {
+            for (i = 0; i < allEndpoints.length; i++) {
                 endpoint = allEndpoints[i];
 
                 this.endpointMap[endpoint.id] = endpoint;
@@ -425,26 +435,24 @@ app.factory('chordChart', function() {
                 endpoint.totalCount = 0;
                 endpoint.isExpanded = false;
 
-                if(!endpoint.name) {
-                    if(endpoint.type == "ip") {
+                if (!endpoint.name) {
+                    if (endpoint.type == "ip") {
                         endpoint.name = "IP Space";
-                    }
-                    else {
+                    } else {
                         endpoint.name = '';
                     }
                 }
 
-                if(!(endpoint.flowType in this.endpointCountsByType)) {
+                if (!(endpoint.flowType in this.endpointCountsByType)) {
                     this.endpointCountsByType[endpoint.flowType] = 0;
                 }
                 endpoint.indexByType = this.endpointCountsByType[endpoint.flowType]++;
 
                 // put the endpoint categories in the record for later use
-                if(endpoint.inTopology) {
+                if (endpoint.inTopology) {
                     endpoint.placement = "topology";
                     data.topologyEndpoints.push(endpoint);
-                }
-                else {
+                } else {
                     endpoint.placement = "remote";
                     data.remoteEndpoints.push(endpoint);
                 }
@@ -458,7 +466,7 @@ app.factory('chordChart', function() {
             var flow, src, dst;
 
             console.log("flow len = " + data.flows.length);
-            for(i = 0; i < data.flows.length; i++) {
+            for (i = 0; i < data.flows.length; i++) {
                 flow = data.flows[i];
 
                 // link flows to their src and destination
@@ -467,14 +475,17 @@ app.factory('chordChart', function() {
                 src.outgoingCount += 1;
                 dst.incomingCount += 1;
 
-                if(!(flow.flowType in this.flowCountsByType)) {
+                if (!(flow.flowType in this.flowCountsByType)) {
                     this.flowCountsByType[flow.flowType] = 0;
                 }
                 this.flowCountsByType[flow.flowType] += 1;
 
-                var endpoints = [["src", src], ["dst", dst]];
+                var endpoints = [
+                    ["src", src],
+                    ["dst", dst]
+                ];
                 var entry;
-                for(j = 0; j < endpoints.length; j++) {
+                for (j = 0; j < endpoints.length; j++) {
                     var direction = endpoints[j][0];
                     endpoint = endpoints[j][1];
 
@@ -483,14 +494,14 @@ app.factory('chordChart', function() {
 
                     // and track expanded node IDs
                     var expandedID = flow[direction + 'ExpandedTarget'];
-                    if(expandedID) {
-                        if(!endpoint.isExpanded) {
+                    if (expandedID) {
+                        if (!endpoint.isExpanded) {
                             endpoint.isExpanded = true;
                             endpoint.expandedIDs = d3.map();
                         }
 
                         entry = endpoint.expandedIDs.get(expandedID);
-                        if(!entry) {
+                        if (!entry) {
                             entry = {
                                 name: flow[direction + 'ExpandedTargetName'],
                                 totalCount: 0,
@@ -501,10 +512,9 @@ app.factory('chordChart', function() {
                         }
 
                         entry.totalCount += 1;
-                        if(direction == "src") {
+                        if (direction == "src") {
                             entry.outgoingCount += 1;
-                        }
-                        else {
+                        } else {
                             entry.incomingCount += 1;
                         }
                     }
@@ -513,11 +523,11 @@ app.factory('chordChart', function() {
 
             // after processing the flows we have info on expanded endpoints, and need to figure out how to lay those out.
             // this is also the stage where we translate the asset names we've found for expanded trustzones
-            for(i = 0; i < allEndpoints.length; i++) {
+            for (i = 0; i < allEndpoints.length; i++) {
                 endpoint = allEndpoints[i];
-                if(endpoint.isExpanded) {
+                if (endpoint.isExpanded) {
                     var expandedIDs = endpoint.expandedIDs.entries();
-                    for(j = 0; j < expandedIDs.length; j++) {
+                    for (j = 0; j < expandedIDs.length; j++) {
                         var entry = expandedIDs[j];
                         var name = entry.key;
 
@@ -542,22 +552,22 @@ app.factory('chordChart', function() {
 
             // because of how we want to layout the flows, we need to calculate their "indexes" along the arc.
             // in order to use the total counts from the previous loop, this needs to be it's own loop
-            for(i = 0; i < data.flows.length; i++) {
+            for (i = 0; i < data.flows.length; i++) {
                 flow = data.flows[i];
                 src = this.endpointMap[flow.srcTarget];
                 dst = this.endpointMap[flow.dstTarget];
 
-                if(flow.srcExpandedTarget) {
+                if (flow.srcExpandedTarget) {
                     src = src.expandedIDMap.get(flow.srcExpandedTarget);
                 }
-                if(flow.dstExpandedTarget) {
+                if (flow.dstExpandedTarget) {
                     dst = dst.expandedIDMap.get(flow.dstExpandedTarget);
                 }
 
-                if(!("_outFlowsSeen" in src)) {
+                if (!("_outFlowsSeen" in src)) {
                     src._outFlowsSeen = 0;
                 }
-                if(!("_inFlowsSeen" in dst)) {
+                if (!("_inFlowsSeen" in dst)) {
                     dst._inFlowsSeen = 0;
                 }
                 flow.srcIndex = (src._outFlowsSeen++);
@@ -565,12 +575,12 @@ app.factory('chordChart', function() {
             }
 
             // lastly, cleanup temp attributes
-            for(i = 0; i < allEndpoints.length; i++) {
+            for (i = 0; i < allEndpoints.length; i++) {
                 endpoint = allEndpoints[i];
-                if("_inFlowsSeen" in endpoint) {
+                if ("_inFlowsSeen" in endpoint) {
                     delete endpoint._inFlowsSeen;
                 }
-                if("_outFlowsSeen" in endpoint) {
+                if ("_outFlowsSeen" in endpoint) {
                     delete endpoint._outFlowsSeen;
                 }
             }
@@ -579,7 +589,7 @@ app.factory('chordChart', function() {
         },
 
         refreshData: function(callback, scope) {
-            if(!this.isTopologyLoading) {
+            if (!this.isTopologyLoading) {
                 this.setTopologyLoading(true);
                 /* Catbird.ss.Insight.getTopologyData(this.isDriftMode, function(response) {
                     this.setTopologyLoading(false);
@@ -597,8 +607,8 @@ app.factory('chordChart', function() {
         },
 
         setCreationProgress: function(data) {
-            for(var i = 0; i < this.subComponents.length; i++) {
-                if(this.subComponents[i].setCreationProgress) {
+            for (var i = 0; i < this.subComponents.length; i++) {
+                if (this.subComponents[i].setCreationProgress) {
                     this.subComponents[i].setCreationProgress(data);
                 }
             }
@@ -608,8 +618,8 @@ app.factory('chordChart', function() {
             this.isSocketConnected = connected;
 
             // notify our subcomponents
-            for(var i = 0; i < this.subComponents.length; i++) {
-                if(this.subComponents[i].setSocketConnected) {
+            for (var i = 0; i < this.subComponents.length; i++) {
+                if (this.subComponents[i].setSocketConnected) {
                     this.subComponents[i].setSocketConnected(connected, details);
                 }
             }
@@ -619,8 +629,8 @@ app.factory('chordChart', function() {
             this.isServerRefreshing = refreshing;
 
             // notify our subcomponents
-            for(var i = 0; i < this.subComponents.length; i++) {
-                if(this.subComponents[i].setServerRefreshing) {
+            for (var i = 0; i < this.subComponents.length; i++) {
+                if (this.subComponents[i].setServerRefreshing) {
                     this.subComponents[i].setServerRefreshing(refreshing);
                 }
             }
@@ -630,8 +640,8 @@ app.factory('chordChart', function() {
             this.isTopologyLoading = loading;
 
             // notify our subcomponents
-            for(var i = 0; i < this.subComponents.length; i++) {
-                if(this.subComponents[i].setTopologyLoading) {
+            for (var i = 0; i < this.subComponents.length; i++) {
+                if (this.subComponents[i].setTopologyLoading) {
                     this.subComponents[i].setTopologyLoading(loading);
                 }
             }
@@ -660,8 +670,8 @@ app.factory('chordChart', function() {
                 });
 
             // initialize our subcomponents
-            for(var i = 0; i < this.subComponents.length; i++) {
-                if(this.subComponents[i].initialize) {
+            for (var i = 0; i < this.subComponents.length; i++) {
+                if (this.subComponents[i].initialize) {
                     this.subComponents[i].initialize();
                 }
             }
@@ -690,14 +700,14 @@ app.factory('chordChart', function() {
                 .attr("r", outerChartRadius + this.chartMargins.outer + this.sizes.endpointLabelMargin);
 
             // resize our subcomponents
-            for(var i = 0; i < this.subComponents.length; i++) {
-                if(this.subComponents[i].resize) {
+            for (var i = 0; i < this.subComponents.length; i++) {
+                if (this.subComponents[i].resize) {
                     this.subComponents[i].resize(sizes, update);
                 }
             }
 
             // We don't want to do wavy motions in resize updates
-            if(update !== false) {
+            if (update !== false) {
                 this.updateChart(0, true);
             }
         },
@@ -705,13 +715,13 @@ app.factory('chordChart', function() {
         updateChart: function(animationTime, resize) {
             var me = this;
 
-            if(typeof(animationTime) != 'number') {
+            if (typeof(animationTime) != 'number') {
                 animationTime = this.animationTime;
             }
 
             // update our subcomponents
-            for(var i = 0; i < this.subComponents.length; i++) {
-                if(this.subComponents[i].update) {
+            for (var i = 0; i < this.subComponents.length; i++) {
+                if (this.subComponents[i].update) {
                     this.subComponents[i].update(animationTime, resize);
                 }
             }
@@ -721,7 +731,7 @@ app.factory('chordChart', function() {
         setDriftMode: function(shouldEnable) {
             // TODO: update any subcomponents as appropriate.
             this.isDriftMode = shouldEnable;
-            this.Selection.setDriftMode(shouldEnable);  // hide endpoint expansion in drift mode...
+            this.Selection.setDriftMode(shouldEnable); // hide endpoint expansion in drift mode...
         }
     };
 
@@ -734,12 +744,30 @@ app.directive('d3chart', ['chordChart', function(chordChart) {
     return {
         restrict: 'E',
         scope: {
-            data: '='
+            data: '=',
+            menuClicked: '&', //popup menu clicked
+            nodeClicked: '&' //node clicked - could be flow, ip, group, etc.
         },
+        template: '<pre><ul id="contextMenu" class="dropdown-menu" style="display: none; position: absolute; background-color: #fff; border: 1px solid #000;" role="menu"><li style="background-color: #fff;" ng-repeat="item in chart.menuItems" ng-click="chart.actions.clickMenu({item: item})"><a tabindex="-1" href="javascript: void(0)" >{{item.text}}</a></li></ul>',
         link: function(scope, element, attrs) {
 
             scope.chart = chordChart;
+            scope.chart.menuItems = [];
             scope.chart.renderChart(element[0], null);
+            scope.chart.actions = {
+                clickMenu: function(item) {
+                    console.log('menu clicked from directive');
+                    scope.menuClicked(item);
+                },
+                nodeClicked: function(node) {
+                    console.log('node clicked from directive');
+                    scope.nodeClicked(node);
+                }
+            }
+
+            $(document).on("click", function() {
+                $("#contextMenu").hide();
+            });
 
             scope.$watch('data', function(newData, oldData) {
                 console.log("chartDirective.js watch callback newData = " + newData);
