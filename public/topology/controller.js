@@ -13,7 +13,8 @@ app.controller('TopologyCtrl', ['$scope', '$http', '$state', 'Assets', function(
 
     $scope.assets = Assets.getAssets();
     $scope.viewTypes = ['graph', 'table'];
-    $scope.selectedDetail = 'Fuck off';
+    $scope.selectedDetail = '';
+    $scope.selectedNode = null;
     $scope.dataFlow = [
         { name: 'Data Flow', region: 'us-west-1a', vpc: '3', securityGroup: '4', tags: [], subnet: '172.1.0.1/24', facing: 'private', details: {} },
         { name: 'Data Flow', region: 'us-east-2a', vpc: '3', securityGroup: '4', tags: [], subnet: '172.1.0.1/24', facing: 'private', details: {} },
@@ -67,18 +68,25 @@ app.controller('TopologyCtrl', ['$scope', '$http', '$state', 'Assets', function(
     }
 
     $scope.menuClicked = function(item) {
-        $scope.showDetails('vpc');
+        console.log(item);
+        if (item.text == 'Expand') $scope.refreshChart(true);
+        else if (item.text == 'Collapse') $scope.refreshChart(false);
+        else $scope.updateView('table');
     };
 
     $scope.nodeClicked = function(node) {
-        alert('Node Clicked');
-        console.log(node);
+        if (node.type == 'trustZone') $scope.showDetails('sg');
+        else if (node.type == 'networkObject') $scope.showDetails('ec2');
+
+        $scope.selectedNode = node;
     };
 
-    $scope.refreshChart = function() {
-        //$http.get('/topology/data.json').then(function(res) {
-        //$http.get('/topology/getTopologyData.json').then(function(res) {
-        $http.get('/topology/getTopologyDataWithExpandedIds.json').then(function(res) {
+    $scope.refreshChart = function(expanded) {
+
+        var url = '/topology/getTopologyData.json';
+        if (expanded) url = '/topology/getTopologyDataWithExpandedIds.json';
+
+        $http.get(url).then(function(res) {
 
             /*angular.forEach(res.data, function(c) {
                 var num = Math.floor(Math.random() * 20000);

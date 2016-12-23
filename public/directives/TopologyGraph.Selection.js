@@ -472,8 +472,13 @@ SelectionCls = function(graph) {
                     top: offset[1]
                 });
 
+                console.log(menuItems);
+                console.log('menu shown');
+
                 //show menu
-                $contextMenu.show();
+                setTimeout(function() {
+                    $contextMenu.show();
+                }, 100);
 
                 // graph.currentMenu = new Ext.menu.Menu({
                 //     items: menuItems,

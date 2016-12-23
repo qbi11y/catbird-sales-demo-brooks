@@ -748,8 +748,12 @@ app.directive('d3chart', ['chordChart', function(chordChart) {
             menuClicked: '&', //popup menu clicked
             nodeClicked: '&' //node clicked - could be flow, ip, group, etc.
         },
-        template: '<pre><ul id="contextMenu" class="dropdown-menu" style="display: none; position: absolute; background-color: #fff; border: 1px solid #000;" role="menu"><li style="background-color: #fff;" ng-repeat="item in chart.menuItems" ng-click="chart.actions.clickMenu({item: item})"><a tabindex="-1" href="javascript: void(0)" >{{item.text}}</a></li></ul>',
+        template: '<ul id="contextMenu" class="dropdown-menu" style="display: none; position: absolute; background-color: #fff; border: 1px solid #000;" role="menu"><li style="background-color: #fff;" ng-repeat="item in chart.menuItems"><button class="btn btn-link" ng-disabled="item.disabled" ng-click="chart.actions.clickMenu({item: item})" tabindex="-1" >{{item.text}}</button></li></ul>',
         link: function(scope, element, attrs) {
+
+            $(document).on('click', function() {
+                $("#contextMenu").hide();
+            });
 
             scope.chart = chordChart;
             scope.chart.menuItems = [];
@@ -758,16 +762,14 @@ app.directive('d3chart', ['chordChart', function(chordChart) {
                 clickMenu: function(item) {
                     console.log('menu clicked from directive');
                     scope.menuClicked(item);
+                    $("#contextMenu").hide();
                 },
                 nodeClicked: function(node) {
                     console.log('node clicked from directive');
                     scope.nodeClicked(node);
+                    $("#contextMenu").hide();
                 }
             }
-
-            $(document).on("click", function() {
-                $("#contextMenu").hide();
-            });
 
             scope.$watch('data', function(newData, oldData) {
                 console.log("chartDirective.js watch callback newData = " + newData);
