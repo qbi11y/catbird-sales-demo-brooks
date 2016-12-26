@@ -155,8 +155,10 @@ app.factory('chordChart', function() {
                 var outerHeight = this.chartHeight + this.chartMargins.top + this.chartMargins.bottom;
 
                 this.root = d3.select(this.chartEl).append('svg:svg')
-                    .attr('width', outerWidth)
-                    .attr('height', outerHeight);
+                    //remove the height and width attributes to force the SVG to scale to the parent
+                    //.attr('width', outerWidth)
+                    //.attr('height', outerHeight)
+                    .attr('viewBox', '-50 -50 800 800');
 
                 this.chart = this.root.append("g")
                     .attr("transform", "translate(" + this.chartMargins.left + "," + this.chartMargins.top + ")");

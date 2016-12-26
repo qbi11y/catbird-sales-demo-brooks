@@ -40,8 +40,7 @@ app.controller('TopologyCtrl', ['$scope', '$http', '$state', 'Assets', function(
     }
 
     $scope.showDetails = function(item) {
-        $('#visualization').removeClass('m12').addClass('m8');
-        $('#visualization-panel').removeClass('hide');
+        //$('#visualization-panel').removeClass('hide');
         switch (item) {
             case 'vpc':
                 //do vpc stuff
@@ -101,7 +100,8 @@ app.controller('TopologyCtrl', ['$scope', '$http', '$state', 'Assets', function(
 
     $scope.build = function() {
         console.log('build it');
-        $('#visualization-flow, #visualization #chart').removeClass('hide');
+        $('#visualization-flow, #visualization #chart, #visualization-panel').removeClass('hide');
+        $('#visualization').removeClass('m12').addClass('m8');
         $('#visualization #no-chart').addClass('hide');
 
         $scope.refreshChart();

@@ -12,6 +12,9 @@
         /* Internet Explorer 5.5+ */
     }
 </style>
+<header ng-controller="HeaderCtrl">
+    <ng-include src="'includes/header.html'"></ng-include>            
+</header>
 
 <div class="container">
     <!-- Page header information -->
@@ -46,12 +49,13 @@
                 <button class="btn btn-primary" ng-click="refreshChart()">Refresh Chart</button>
                 <!--<h5><img src="images/bundled-hiearrarchy2.png" /></h5>-->
                 <ul>
-                    <li><a href="" ng-click="showDetails('vpc')">VPC</a></li>
+                    <li><a href="" ng-click="showDetails('vpc')">VPC Test</a></li>
                     <li><a href="" ng-click="showDetails('sg')">Security Group -see the info or the traffic</a></li>
                     <li><a href="" ng-click="showDetails('ec2')">EC2 Instance</a></li>
                 </ul>
             </div>
         </div>
+
         <div class="col m4 catbird-well hide" id="visualization-panel">
             <h5>{{ selectedDetail }} Details</h5>
             <ul>
