@@ -472,9 +472,6 @@ SelectionCls = function(graph) {
                     top: offset[1]
                 });
 
-                console.log(menuItems);
-                console.log('menu shown');
-
                 //show menu
                 setTimeout(function() {
                     $contextMenu.show();
@@ -497,7 +494,9 @@ SelectionCls = function(graph) {
             }
 
             //find SVG, find scope, call click event
-            angular.element(this).scope().chart.actions.nodeClicked({ node: d });
+
+            if (d)
+                angular.element(this).scope().chart.actions.nodeClicked({ node: d });
 
             //  //find the context menu
             //     var $contextMenu = angular.element($("#contextMenu"));

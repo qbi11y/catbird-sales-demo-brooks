@@ -74,8 +74,8 @@ app.controller('TopologyCtrl', ['$scope', '$http', '$state', 'Assets', function(
     };
 
     $scope.nodeClicked = function(node) {
-        if (node.type == 'trustZone') $scope.showDetails('sg');
-        else if (node.type == 'networkObject') $scope.showDetails('ec2');
+        if (node && node.type == 'trustZone') $scope.showDetails('sg');
+        else if (node && node.type == 'networkObject') $scope.showDetails('ec2');
 
         $scope.selectedNode = node;
     };

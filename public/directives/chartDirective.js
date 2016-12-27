@@ -143,6 +143,9 @@ app.factory('chordChart', function() {
         // Sets up the top-level chart element once the DOM is ready
         renderChart: function(element, data, scope) {
             if (this.chart && data) {
+
+                //remove all from graph except for root and first group
+                d3.select(this.chartEl).select('svg').select('g').selectAll("*").remove();
                 this.loadData(data);
                 this.initChart(); // sort of "create topology"; redraw endpoints, etc.
                 this.myRenderChart();
