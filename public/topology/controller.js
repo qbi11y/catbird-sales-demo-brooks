@@ -23,8 +23,6 @@ app.controller('TopologyCtrl', ['$scope', '$http', '$state', 'Assets', function(
 
     $scope.chartData = null;
 
-    console.log('viz assets', $scope.assets);
-
     $scope.updateView = function(view) {
         switch (view) {
             case 'graph':
