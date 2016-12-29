@@ -65,17 +65,29 @@ app.controller('TopologyCtrl', ['$scope', '$http', '$state', 'Assets', function(
     }
 
     $scope.menuClicked = function(item) {
-        console.log(item);
+
         if (item.text == 'Expand') $scope.refreshChart(true);
         else if (item.text == 'Collapse') $scope.refreshChart(false);
-        else $scope.updateView('table');
+
+        if (item.text == 'Show Details' && item.type == 'expandedendpoint') { $scope.showDetails('ec2'); }
+        if (item.text == 'Show Details' && item.type == 'endpoint') { $scope.showDetails('sg'); }
+
+        if (item.text == 'View Flow Data') {
+            $scope.someModel = 'table';
+            $scope.updateView('table');
+        }
+
     };
 
     $scope.nodeClicked = function(node) {
-        if (node && node.type == 'trustZone') $scope.showDetails('sg');
-        else if (node && node.type == 'networkObject') $scope.showDetails('ec2');
 
-        $scope.selectedNode = node;
+        // do nothing on node click for now
+        return;
+
+        // if (node && node.type == 'trustZone') $scope.showDetails('sg');
+        // else if (node && node.type == 'networkObject') $scope.showDetails('ec2');
+
+        // $scope.selectedNode = node;
     };
 
     $scope.refreshChart = function(expanded) {
@@ -84,12 +96,6 @@ app.controller('TopologyCtrl', ['$scope', '$http', '$state', 'Assets', function(
         if (expanded) url = '/topology/getTopologyDataWithExpandedIds.json';
 
         $http.get(url).then(function(res) {
-
-            /*angular.forEach(res.data, function(c) {
-                var num = Math.floor(Math.random() * 20000);
-                c.size = num;
-            });*/
-            console.log("topology\controller.js refreshChart");
             $scope.chartData = res.data.result;
         }, function(err) {
             console.log('json error', err);

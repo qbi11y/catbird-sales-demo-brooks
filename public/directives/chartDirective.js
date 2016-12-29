@@ -765,12 +765,10 @@ app.directive('d3chart', ['chordChart', function(chordChart) {
             scope.chart.renderChart(element[0], null);
             scope.chart.actions = {
                 clickMenu: function(item) {
-                    console.log('menu clicked from directive');
                     scope.menuClicked(item);
                     $("#contextMenu").hide();
                 },
                 nodeClicked: function(node) {
-                    console.log('node clicked from directive');
                     scope.nodeClicked(node);
                     $("#contextMenu").hide();
                 }

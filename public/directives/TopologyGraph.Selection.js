@@ -364,54 +364,68 @@ SelectionCls = function(graph) {
                         title = graph.Endpoint.fullName(d);
                     }
                     menuItems = [{
-                        text: "Intra Endpoint View",
-                        // if the node is expanded or not part of the topology, disable intra-view
-                        disabled: child || !endpoint.inTopology || Selection.isDriftMode,
-                        handler: function() {
-                            /* graph.refOwner.addTab({
-                                xtype: 'cb.insight.endpointintrasummarygrid',
-                                title: title + ' - Intra Endpoint',
-                                tabTip: title + ' - Intra Endpoint',
-                                closable: true,
-                                d: endpoint,
-                                child: child,
-                                graph: graph
-                            }); */
-                            console.log("TopologyGraph.Selection handle Intra Endpoint View");
+                            text: 'Show Details',
+                            endpoint: endpoint,
+                            child: child,
+                            type: child ? 'expandedendpoint' : 'endpoint'
+                        }, {
+                            text: 'View Flow Data',
+                            endpoint: endpoint,
+                            child: child,
+                            type: child ? 'expandedendpoint' : 'endpoint'
+                        },
+                        // {
+                        //     text: "Intra Endpoint View",
+                        //     // if the node is expanded or not part of the topology, disable intra-view
+                        //     disabled: child || !endpoint.inTopology || Selection.isDriftMode,
+                        //     handler: function() {
+                        //         /* graph.refOwner.addTab({
+                        //             xtype: 'cb.insight.endpointintrasummarygrid',
+                        //             title: title + ' - Intra Endpoint',
+                        //             tabTip: title + ' - Intra Endpoint',
+                        //             closable: true,
+                        //             d: endpoint,
+                        //             child: child,
+                        //             graph: graph
+                        //         }); */
+                        //         console.log("TopologyGraph.Selection handle Intra Endpoint View");
+                        //     }
+                        // },
+                        // {
+                        //     text: "Inter Endpoint View",
+                        //     handler: function() {
+                        //         /* graph.refOwner.addTab({
+                        //             xtype: 'panel',
+                        //             title: title + ' - Inter Endpoint',
+                        //             tabTip: title + ' - Inter Endpoint',
+                        //             closable: true,
+                        //             items: [{
+                        //                 xtype: Selection.isDriftMode?'cb.whitelistendpointegresseventgrid':'cb.insight.endpointingresssummarygrid',
+                        //                 d: endpoint,
+                        //                 child: child,
+                        //                 graph: graph
+                        //             }, {
+                        //                 xtype: Selection.isDriftMode?'cb.whitelistendpointingresseventgrid':'cb.insight.endpointingresssummarygrid',
+                        //                 d: endpoint,
+                        //                 child: child,
+                        //             }],
+                        //             layout:'vbox',
+                        //             flex: true,
+                        //             split: true,
+                        //             border: false
+                        //         }); */
+                        //         console.log("TopologyGraph.Selection handle Inter Endpoint View");
+                        //     }
+                        // },
+                        {
+                            text: (endpoint.isExpanded ? "Collapse" : "Expand"),
+                            disabled: graph.expandingIDs.has(endpoint.id) || Selection.isDriftMode,
+                            handler: function() {
+                                console.log("TopologyGraph.Selection handle Expand / Collapse");
+                                //graph.Endpoint.expandEndpoint(endpoint);
+                            }
                         }
-                    }, {
-                        text: "Inter Endpoint View",
-                        handler: function() {
-                            /* graph.refOwner.addTab({
-                                xtype: 'panel',
-                                title: title + ' - Inter Endpoint',
-                                tabTip: title + ' - Inter Endpoint',
-                                closable: true,
-                                items: [{
-                                    xtype: Selection.isDriftMode?'cb.whitelistendpointegresseventgrid':'cb.insight.endpointingresssummarygrid',
-                                    d: endpoint,
-                                    child: child,
-                                    graph: graph
-                                }, {
-                                    xtype: Selection.isDriftMode?'cb.whitelistendpointingresseventgrid':'cb.insight.endpointingresssummarygrid',
-                                    d: endpoint,
-                                    child: child,
-                                }],
-                                layout:'vbox',
-                                flex: true,
-                                split: true,
-                                border: false
-                            }); */
-                            console.log("TopologyGraph.Selection handle Inter Endpoint View");
-                        }
-                    }, {
-                        text: (endpoint.isExpanded ? "Collapse" : "Expand"),
-                        disabled: graph.expandingIDs.has(endpoint.id) || Selection.isDriftMode,
-                        handler: function() {
-                            console.log("TopologyGraph.Selection handle Expand / Collapse");
-                            //graph.Endpoint.expandEndpoint(endpoint);
-                        }
-                    }];
+                    ];
                 } else {
                     // selection is a flow
                     if (Selection.isDriftMode) {
@@ -431,6 +445,16 @@ SelectionCls = function(graph) {
                         }];
                     } else {
                         menuItems = [{
+                            text: 'Show Details',
+                            endpoint: endpoint,
+                            child: child,
+                            type: 'flow'
+                        }, {
+                            text: 'View Flow Data',
+                            endpoint: endpoint,
+                            child: child,
+                            type: 'flow'
+                        }, {
                             text: "Topology Line View",
                             handler: function() {
                                 /* graph.refOwner.addTab({
